@@ -35,6 +35,20 @@ This project serves as an open source (though purchasable) alternative to the po
 
 ## Version History
 
+### Revision 1
+
+<div align="center">
+  
+  ![rev 1 unpopulated with a banana (overripe) for scale](./media/rev1unpopnanner4scale)
+
+  #### unpopulated first revision board
+  
+</div>
+
+### Revision 2
+
+### Revision 3
+
 ## Project Features
 
 ## Purchasing
