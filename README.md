@@ -37,7 +37,7 @@ This project serves as an open source (though purchasable) alternative to the po
 
 ### Revision 1
 
-Although the initial off the shelf project this module was based around utilized an Arduino Nano, we ended up choosing an Espressif ESP32-S3 due to easier access to coded PHY functionality required for useable ranges.
+Although the initial off the shelf project this module was based around utilized an Arduino Nano 33 BLE, we ended up choosing an Espressif ESP32-S3 due to easier access to coded PHY functionality required for useable ranges.
 
 <div align="center">
   
@@ -46,23 +46,23 @@ Although the initial off the shelf project this module was based around utilized
   
 </div>
 
-Two signals wires providing a potential of atleast 12v are required to drive a NA Miata headlight motor at a resonable speed. One wire must be sent high and the other kept low to open the healight, and this must be inverted to lower the headlight. If both wires are sent high, the headlight will continue to open and close until one wire goes low. In order to provide these 12v+ signals from a 3.3v logic level micro controller, we decided to utilize optocouplers to switch the headlight supply power. For this revision we utilized TLP5701 optocouplers. On this revision we also used these same optocouplers, with a series resistor, to measure the two status wires for each of the headlights. This approach proved to be overkill on further investigation into the motor. 
+Two signal wires providing a potential of atleast 12v are required to drive a NA Miata headlight motor at a resonable speed. One wire must be sent high and the other kept low to open the healight, and this must be inverted to lower the headlight. If both wires are sent high, the headlight will continue to open and close until one wire goes low. In order to provide these 12v+ signals from a 3.3v logic level micro controller, we decided to utilize optocouplers to switch the headlight supply power. For this revision we utilized TLP5701 optocouplers. On this revision we also used these same optocouplers, with a series resistor, to measure the two status wires for each of the headlights. This approach proved to be overkill on further investigation into the motor. 
 
 <div align="center">
   
-  <img src="./media/rev1assembled.png" alt="rev 1 unpopulated with a banana (overripe) for scale" width="40%"></img>
+  <img src="./media/rev1assembled.png" alt="Assembled first revision board during testing" width="40%"></img>
   #### Assembled first revision board during testing
   
 </div>
 
-The voltage range provided to the headlights by the miata ranges between 12-15v, but the ESP32 requires a much smaller supply voltage of 3.3v. We ended up selecting a KF33BD-TR LDO to generate the 3.3v required to run the ESP32. Due to heat generated from this large voltage step down, we utilized a two stage power supply in the second revision. 
+The voltage range provided to the headlights by the Miata ranges between 12-15v, but the ESP32 requires a much smaller supply voltage of 3.3v. We ended up selecting a KF33BD-TR LDO to generate the 3.3v required to run the ESP32. Due to heat generated from this large voltage step down, we utilized a two stage power supply in the second revision. 
 The connectors we chose were two five position AUH series wire-to-board connectors from JST. These connectors ended up being too small for our crimping tools so this revision was tested by soldering wire to the board. Additionally, we implemented status LEDs on all of the outputs to aid in diagnostics.
 
 
 <div align="center">
   
-  <img src="./media/rev1pcb.png" alt="rev 1 unpopulated with a banana (overripe) for scale" width="20%"></img>
-  <img src="./media/rev1schem.png" alt="rev 1 unpopulated with a banana (overripe) for scale" width="50%"></img>
+  <img src="./media/rev1pcb.png" alt="rev 1 printed circuit board" width="20%"></img>
+  <img src="./media/rev1schem.png" alt="rev 1 schematic" width="50%"></img>
 
   #### Revision 1 PCB and schematic
   
@@ -70,11 +70,33 @@ The connectors we chose were two five position AUH series wire-to-board connecto
 
 ### Revision 2
 
+We made a number of changes between Revision 1 and 2. On the first revision, our passive components were a mixture of 0402 (1005 metric) and 0603 (1608 metric) footprint sizes. We found the 0402 size to be too tedious for effecient hand assembling, so we switched entirely to 0603 size footprints from this revision onward.
+
 <div align="center">
   
-  <img src="./media/rev2unpop.png" alt="rev 1 unpopulated with a banana (overripe) for scale" width="50%"></img>
+  <img src="./media/rev2unpop.png" alt="unpopulated second revision board" width="50%"></img>
   #### unpopulated second revision board
     
+</div>
+
+The biggest change implemented on this revision was the two stage power supply. We continued to use the KF33BD-TR LDO, but paired it with a TPP361061 buck converter. In this configuration we used the buck converter to generate a 5v supply from the 12-15v stage which was then fed into the LDO to provide the needed 3.3v for ESP32 operation. This completely solved the power supply overheating issues. We also were able to reduce the required number of optocouplers from 8 to 5. Instead of monitoring motor state, which proved to be unnecessary for the planned fuctions at the time, we chose to monitor the dashboard button to enable additional control features. This also reduced the number of required passive components and lowered the overall cost as the TLP5701 optocouplers were a large portion of total board cost.
+
+<div align="center">
+  
+  <img src="./media/rev2assembled.png" alt="Assembled second revision board" width="50%"></img>
+  #### Assembled second revision board
+    
+</div>
+
+For this revision we also changed the connector to a single Molex MINI50 8 position connector, which was a large improvement over the previous connector selection for this application. This enabled us to make a single cable wiring harness that could be more "plug and play" in the sense that it was able to directly plug into the existing Miata headlight connectors without modification to the car's wiring. The last change this version had was the addition of a diagnostic usb port with a connector to toggle power delivery over usb. This allowed us to reprogram the ESP32 after it was soldered and also enabled us to debug over serial during operation by viewing printouts. We also wanted to provide resistance to interference from the electrically noisy environment of the engine bay by stitching vias around the board edge, but went a bit overkill in this revision. We improved this to a reasonable level in the third revision.
+
+<div align="center">
+  
+  <img src="./media/rev2pcb.png" alt="rev 2 printed circuit board" width="35%"></img>
+  <img src="./media/rev2schem.png" alt="rev 2 schematic" width="50%"></img>
+
+  #### Revision 2 PCB and schematic
+  
 </div>
 
 ### Revision 3
