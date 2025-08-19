@@ -101,6 +101,13 @@ For this revision we also changed the connector to a single Molex MINI50 8 posit
 
 ### Revision 3
 
+<div align="center">
+  
+  <img src="./media/rev3render.png" alt="pre ordering rendering of revision 3 assembled board" width="50%"></img>
+  #### Rendering of assembled revision 3 board
+    
+</div>
+
 ## Project Features
 
 ## Purchasing
