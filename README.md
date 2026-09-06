@@ -128,7 +128,7 @@ For this revision we also changed the connector to a single Molex MINI50 8 posit
 For this revision we wanted to get the inputs working, so we selected a different optocoupler, the 4N25, to be used instead. We also changed the value of the input resistor to ~590Ω. To limit the cost of assembly, we decided to use this chip for both the inputs and outputs. This did end up getting the inputs working, but also created other issues because the 4N25 optocouplers were not able to drive the headlight motors, we think due to the optocouplers not being able to pass enough current.
 
 <div align="center">
-  <img src="./media/rev3assembled.png" alt="Assembled revision 3 board" width="50%"></img>
+  <img src="./media/rev3assembled.jpg" alt="Assembled revision 3 board" width="50%"></img>
   <p>Assembled revision 3 board</p>
 </div>
 <div align="center">
@@ -139,22 +139,12 @@ For this revision we wanted to get the inputs working, so we selected a differen
 
 Another big change we made between rev 2 and 3 switching the wire harness connector. We decided to move away from the Molex MINI50 so we would have an easier time making a water tight/water resistant enclosure. We decided to go with the Molex MX120G because it was much easier to design a water tight case for.
 
-<div align="center">
-  <img src="./media/rev3pcb.png" alt="rev 3 printed circuit board" width="35%"></img>
-  <img src="./media/rev3schem.png" alt="rev 3 schematic" width="50%"></img>
-   <p>Revision 3 PCB and schematic</p>
-</div>
-<div align="center">
-  <b>⏦</b>
-</br>
-</div>
-</br>
 
 ### Revision 4
 
 <div align="center">
   <img src="./media/rev4render.png" alt="pre ordering rendering of revision 4 assembled board" width="50%"></img>
-  <img src="./media/rev4render.png" alt="revision 4 board with applied solder paste" width="50%"></img>
+  <img src="./media/rev4solderpaste.png" alt="revision 4 board with applied solder paste" width="50%"></img>
   <p>rendering of assembled revision 4 board, revision 4 board with solder paste</p>
 </div>
 <div align="center">
@@ -163,12 +153,12 @@ Another big change we made between rev 2 and 3 switching the wire harness connec
 </div>
 </br>
 
-Revision 4 was the first version that had both inputs and outputs working. We used TLP5701 optocouplers for the four output channels, and 4N25 optocouplers for the motion and button input channels. 
+Revision 4 is our final version of this board. We used TLP5701 optocouplers for the four output channels, and 4N25 optocouplers for the dashboard button and two motion motion input channels. Additionally, two GPIO pads are directly connected to a connector and configured as 3.3v pull ups. These enable additional functions such as switches or buttons which can be used to potentially toggle modes, or trigger certain preset sequences (it is left up to the user to decide how they want to implement this, if at all). I went through the effort of length matching them in case someone wanted to use them for an I2C bus. Photos of an implementation using buttons are shown later in this readme. 
 
 
 <div align="center">
-  <img src="./media/rev4render.png" alt="revision 4 board with all SMD components placed, prior to reflow" width="50%"></img>
-  <img src="./media/rev4render.png" alt="Assembled revision 4 board in case" width="50%"></img>
+  <img src="./media/rev4unreflowed.png" alt="revision 4 board with all SMD components placed, prior to reflow" width="50%"></img>
+  <img src="./media/rev4assembled.png" alt="Assembled revision 4 board in case" width="50%"></img>
   <p>Revision 4 board with all SMD components placed prior to reflow, Assembled revision 4 board in case</p>
 </div>
 <div align="center">
@@ -177,10 +167,10 @@ Revision 4 was the first version that had both inputs and outputs working. We us
 </div>
 </br>
 
-our initial batch of boards had an incorrect edge outline, so we had to sand down the excess material to provide enough clearance to slot the connector into our case. We printed the case out of clear PETG on a Bambu Lab X1C.
+The board mounts into a 3D printed case (printed in black ASA on a bambu labs X1C) which uses deformable plastic pegs as a mounting mechanism, enabling the board to slot in without the use of an additional fastener. In order to provide resistance to water intrusion the interface between the body and lid of the case is designed as a tongue and groove that is tilted to one corner and connected to a drain at that corner, allowing any intruding water to flow out. There was an attempt to make a fully fastener free case, but we ran into issues with incomplete seating of the lid and poor holding strength.
 
 <div align="center">
-  <img src="./media/rev4pcb.png" alt="rev 4 printed circuit board" width="50%"></img>
+  <img src="./media/rev4pcbview.png" alt="rev 4 printed circuit board" width="50%"></img>
   <img src="./media/rev4schem.png" alt="rev 4 schematic" width="50%"></img>
    <p>Revision 4 PCB and schematic</p>
 </div>
@@ -190,7 +180,7 @@ our initial batch of boards had an incorrect edge outline, so we had to sand dow
 </div>
 </br>
 
-## Project Features
+## Installation and other use examples
 
 ## Purchasing
 Information about obtaining a pre assembled module will be coming soon
